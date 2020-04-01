@@ -1,6 +1,7 @@
 import React from 'react'
-import {Searchbar} from './Searchbar'
-import {TicketList} from './TicketList'
+import {Searchbar} from '../SearchBar/Searchbar'
+import {TicketList} from '../TicketList/TicketList'
+import './Sidebar.css'
 
 class Sidebar extends React.Component {
 

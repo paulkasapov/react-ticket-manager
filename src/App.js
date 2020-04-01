@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import {Sidebar} from './components/Sidebar'
-import {Content} from './components/Content'
+import {Sidebar} from './components/Sidebar/Sidebar'
+import {Content} from './components/Content/Content'
 
 const shortedStatus = {
     assigned: {
@@ -49,10 +49,14 @@ class App extends React.Component {
     }
 
     getData = async () => {
-        // const res = await fetch("https://raw.githubusercontent.com/Tapify/public-code-test/master/web-ui-test/tickets.json");
-        const res = await fetch('http://127.0.0.1:3030/api/tickets');
-        const data = await res.json();
-        this.setState({data: data})
+        try {
+            const res = await fetch("https://raw.githubusercontent.com/Tapify/public-code-test/master/web-ui-test/tickets.json");
+            // const res = await fetch('http://127.0.0.1:3030/api/tickets');
+            const data = await res.json();
+            this.setState({data: data})
+        } catch (e) {
+            console.error('Ошибка:', e)
+        }
     }
 
     render() {

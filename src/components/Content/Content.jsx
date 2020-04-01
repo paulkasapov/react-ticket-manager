@@ -1,25 +1,26 @@
 import React from 'react'
-import {TicketDescription} from './TicketDescription'
+import {TicketDescription} from '../TicketDescription/TicketDescription'
 import moment from "moment";
-import Cross from '../assets/cross.png'
+import Cross from '../../assets/cross.png'
+import './Content.css'
 
-class Content extends React.Component {
+const Content = props => {
 
-    showDescription = (ticket) => {
+    const showDescription = (ticket) => {
         if (ticket) {
             return (
                 <div style={styles.content}>
                     <div style={{...styles.container, ...{fontSize: '10px'}}}>
                         <div>
                             <div style={{display: 'inline-block', color: '#707070'}}>TICKET NO.</div>
-                            <div style={{display: 'inline-block', marginLeft: '3px'}}>{this.props.selectedTicket.number}</div>
+                            <div style={{display: 'inline-block', marginLeft: '3px'}}>{props.selectedTicket.number}</div>
                         </div>
                         <div style={{color: '#707070'}}>LAST
-                            UPDATED: {moment(this.props.selectedTicket.lastUpdatedTime).format('DD/MM/YY hh:mm')}</div>
+                            UPDATED: {moment(props.selectedTicket.lastUpdatedTime).format('DD/MM/YY hh:mm')}</div>
                     </div>
 
-                    <TicketDescription selectedTicket={this.props.selectedTicket}
-                                       renderStatus={this.props.renderStatus}/>
+                    <TicketDescription selectedTicket={props.selectedTicket}
+                                       renderStatus={props.renderStatus}/>
                 </div>)
         }
         return <div style={{...styles.content, ...{display: 'flex', alignItems: 'center', justifyContent: 'center'}}}>
@@ -30,11 +31,10 @@ class Content extends React.Component {
         </div>
     }
 
-    render() {
-        return (
-            this.showDescription(this.props.selectedTicket)
-        )
-    }
+    return (
+        showDescription(props.selectedTicket)
+    )
+
 }
 
 const styles = {
