@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import {Sidebar} from './components/Sidebar/Sidebar'
 import {Content} from './components/Content/Content'
+import {TicketAddModal} from "./components/TicketAddModal/TicketAddModal";
 
 const shortedStatus = {
     assigned: {
@@ -22,7 +23,8 @@ class App extends React.Component {
 
     state = {
         data: [],
-        selectedTicket: ''
+        selectedTicket: '',
+        isModalOpen: false
     }
 
     componentDidMount() {
@@ -31,6 +33,14 @@ class App extends React.Component {
 
     setSelected = (selectedTicket) => {
         this.setState({selectedTicket: selectedTicket})
+    }
+
+    handleOpenModal = () => {
+        this.setState({isModalOpen: true})
+    }
+
+    handleCloseModal = () => {
+        this.setState({isModalOpen: false})
     }
 
     renderStatus = (status) => {
@@ -54,6 +64,7 @@ class App extends React.Component {
             // const res = await fetch('http://127.0.0.1:3030/api/tickets');
             const data = await res.json();
             this.setState({data: data})
+            console.log(data)
         } catch (e) {
             console.error('Ошибка:', e)
         }
@@ -68,8 +79,22 @@ class App extends React.Component {
                     fontWeight: 'bold',
                     borderBottom: '3px solid #723ae8',
                     padding: '5px',
-                    margin: '5px'
-                }}>Tickets
+                    margin: '5px',
+                    position: 'relative',
+                }}>
+                    <div>Tickets</div>
+                    <button onClick={this.handleOpenModal} style={{
+                        border: '1px solid rgb(33, 33, 33)',
+                        borderRadius: '3px',
+                        backgroundColor: 'rgb(114, 58, 232)',
+                        color: 'inherit',
+                        position: 'absolute',
+                        right: '5px',
+                        top: '5px',
+                        width: '20px',
+                        height: '20px',
+                        padding: 0,
+                        fontSize:'18px'}}>+</button>
                 </div>
                 <div style={styles.container}>
                     <Sidebar data={this.state.data}
@@ -81,7 +106,10 @@ class App extends React.Component {
                              selectedTicket={this.state.selectedTicket}
                              renderStatus={this.renderStatus}/>
                 </div>
+                <TicketAddModal handleCloseModal={this.handleCloseModal}
+                                isModalOpen={this.state.isModalOpen}/>
             </div>
+
         )
     }
 }

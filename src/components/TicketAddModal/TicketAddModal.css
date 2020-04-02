@@ -1,0 +1,100 @@
+.modal {
+    background-color: rgba(50, 50, 50, 0.8);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+.modal-content {
+    background-color: rgb(80, 80, 80);
+    width: 80%;
+    margin: 10% auto;
+}
+
+.modal-content > form {
+    padding: 10px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 0 3px 3px rgba(90,90, 90, 0.8);
+    -moz-box-shadow:    0 0 3px 3px rgba(90,90, 90, 0.8);
+    box-shadow:         0 0 3px 3px rgba(90,90, 90, 0.8);
+}
+
+.form-field > input, .form-field > textarea {
+    height: 30px;
+    background-color: #252525;
+    border: 1px solid #3e3e3e;
+    color: #9b9b98;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.name-field > input, .description-field > textarea {
+    width: calc(100% - 105px);
+}
+
+.description-field > textarea {
+    height: 80px;
+    resize: none;
+    vertical-align: top;
+}
+
+.status-field, .geocode-field, .kilometers-field {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.geocode-field > input, .kilometers-field > input {
+    width: 70px;
+    margin-left: 5px;
+}
+
+.form-field {
+    margin-bottom: 5px;
+}
+
+.form-field > p {
+    width: 100px;
+    display: inline-block;
+    padding: 5px 0;
+    margin: 0;
+}
+
+.geocode-field > p, .kilometers-field > p {
+    width: auto;
+}
+
+.submit-btn {
+    position: relative;
+    margin-top: 10px;
+    height: 25px;
+}
+
+.status-field > select, .status-field > select > option, .submit-btn > input {
+    padding: 5px 0px;
+    border: 1px solid rgb(33, 33, 33);
+    border-radius: 3px;
+    display: inline-block;
+    background-color: rgb(80, 80, 80);
+    color: inherit;
+}
+
+.submit-btn > input {
+    position: absolute;
+    right: 10px;
+    padding: 5px;
+    background-color: rgb(70, 70, 70);
+}
+
+.status-field .assigned-select {
+    color: #ffc11a
+}
+
+.status-field .unassigned-select {
+    color: #707070
+}
+
+.status-field .completed-select {
+    color: #0bb141
+}
