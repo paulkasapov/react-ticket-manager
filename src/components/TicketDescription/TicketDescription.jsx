@@ -2,7 +2,7 @@ import React from 'react'
 import {DescriptionCard} from "../DescriptionCard/DescriptionCard";
 import {DescriptionField} from "../DescriptionField/DescriptionField";
 import moment from "moment";
-import './TicketDescription.css'
+import styles from './TicketDescription.module.css'
 
 
 const TicketDescription = props => {
@@ -13,42 +13,19 @@ const TicketDescription = props => {
 
     const renderLocation = (locationFrom, locationTo) => {
         return <div>
-            <div style={{
-                padding: '3px 0',
-                textAlign: 'center',
-                width: '60px',
-                border: '1px solid #212121',
-                borderRadius: '3px',
-                fontWeight: '500',
-                display: 'inline-block',
-                margin: '3px 3px 0 0'
-            }}>{locationFrom.toFixed(3)}</div>
-            <div style={{
-                padding: '3px 0',
-                textAlign: 'center',
-                width: '60px',
-                border: '1px solid #212121',
-                borderRadius: '3px',
-                fontWeight: '500',
-                display: 'inline-block',
-                margin: '3px 3px 0 0'
-            }}>{locationTo.toFixed(3)}</div>
+            <div className={styles.location}>{locationFrom.toFixed(3)}</div>
+            <div className={styles.location}>{locationTo.toFixed(3)}</div>
         </div>
     }
+    
     return (
-        <div style={{height: 'calc(100vh - 120px)', overflow: 'auto'}}>
+        <div className={styles.wrapper}>
             <DescriptionCard title='Owner'>
-                <div style={{backgroundColor: '#323232', padding: '3px'}}>
-                    <div style={{display: 'inline-block'}}>
-                        <img src={props.selectedTicket.owner.avatar}
-                             style={{width: '30px', height: '30px', borderRadius: '50%'}}/>
-                    </div>
-                    <div style={{display: 'inline-block', verticalAlign: 'top', padding: '2px 0 0 10px'}}>
+                <div className={styles.ownerField}>
+                    <img src={props.selectedTicket.owner.avatar} className={styles.ownerImg}/>
+                    <div className={styles.ownerText}>
                         <div>{props.selectedTicket.owner.firstName} {props.selectedTicket.owner.lastName}</div>
-                        <div style={{
-                            textTransform: 'uppercase',
-                            fontSize: '8px'
-                        }}>{props.selectedTicket.owner.specialities.join(', ')}</div>
+                        <div className={styles.ownerSpeciality}>{props.selectedTicket.owner.specialities.join(', ')}</div>
                     </div>
                 </div>
             </DescriptionCard>

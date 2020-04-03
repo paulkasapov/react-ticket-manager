@@ -1,0 +1,22 @@
+.wrapper {
+    padding-bottom: 10px;
+    position: relative;
+}
+
+.searchInput {
+    width: 100%;
+    height: 30px;
+    background-color: rgb(37, 37, 37);
+    border: 1px solid rgb(62, 62, 62);
+    color: rgb(155, 155, 152);
+    padding: 0px 5px 0px 25px;
+    box-sizing: border-box;
+    line-height: 30px;
+}
+
+.searchImg {
+    width: 10px;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}

@@ -1,7 +1,7 @@
 import React from 'react'
 import {Searchbar} from '../SearchBar/Searchbar'
 import {TicketList} from '../TicketList/TicketList'
-import './Sidebar.css'
+import styles from './Sidebar.module.css'
 
 class Sidebar extends React.Component {
 
@@ -26,7 +26,7 @@ class Sidebar extends React.Component {
 
     render() {
         return (
-            <div style={styles.sidebar}>
+            <div className={styles.sidebar}>
                 <Searchbar handleFilterChange={this.handleFilterChange}/>
                 <TicketList data={this.handleFilter()}
                             selectedTicket={this.props.selectedTicket}
@@ -34,14 +34,6 @@ class Sidebar extends React.Component {
                             renderStatus={this.props.renderStatus}/>
             </div>
         )
-    }
-}
-
-const styles = {
-    sidebar: {
-        flex: '1',
-        margin: '5px',
-        minWidth: '350px'
     }
 }
 

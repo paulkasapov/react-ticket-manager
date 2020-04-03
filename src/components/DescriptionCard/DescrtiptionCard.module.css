@@ -1,0 +1,15 @@
+.wrapper {
+    background-color: rgb(44, 44, 44);
+    margin: 10px 10px 0px;
+    padding: 2px;
+}
+
+.title {
+    padding: 5px 10px;
+    font-weight: 600;
+}
+
+.content {
+    background-color: rgb(50, 50, 50);
+    padding: 8px;
+}

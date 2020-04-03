@@ -1,39 +1,48 @@
 import React from 'react'
-import './TicketAddModal.css'
+import styles from './TicketAddModal.module.css'
+// import cx from 'classnames'
 
 const TicketAddModal = props => {
+    // const {size} = props; //деструктуризация
+    //
+    // const className = cx(styles.customBox, {
+    //     [styles.tiny]:size === 'sm',
+    //     [styles.medium]:size === 'md',
+    // })
+
+
 
     const showModalPopUp = (isModalOpen) => {
         if (isModalOpen) {
             return (
-                <div id={'modal'} onClick={handlerClose} className={'modal'}>
-                    <div className={'modal-content'}>
+                <div id={'modal'} onClick={handlerClose} className={styles.modal}>
+                    <div className={styles.modalContent}>
                         <form>
-                            <div className={'form-field name-field'}>
+                            <div className={`${styles.formField} ${styles.nameField}`}>
                                 <p>Ticket name</p>
                                 <input type={'text'}/>
                             </div>
-                            <div className={'form-field description-field'}>
+                            <div className={`${styles.formField} ${styles.descriptionField}`}>
                                 <p>Ticket description</p>
                                 <textarea type={'text'}/>
                             </div>
-                            <div className={'form-field status-field'}>
+                            <div className={`${styles.formField} ${styles.statusField}`}>
                                 <p>Status</p>
                                 <select>
-                                    <option className={'assigned-select'}>ASD</option>
-                                    <option className={'unassigned-select'}>UNA</option>
-                                    <option className={'completed-select'}>COM</option>
+                                    <option className={styles.assignedSelect}>ASD</option>
+                                    <option className={styles.unassignedSelect}>UNA</option>
+                                    <option className={styles.completedSelect}>COM</option>
                                 </select>
                             </div>
-                            <div className={'form-field geocode-field'}>
+                            <div className={`${styles.formField} ${styles.geocodeField}`}>
                                 <p>GeoCode</p>
                                 <input type={'text'}/>
                             </div>
-                            <div className={'form-field kilometers-field'}>
+                            <div className={`${styles.formField} ${styles.kilometersField}`}>
                                 <p>Kilometers</p>
                                 <input type={'text'} placeholder={'From'}/><input type={'text'} placeholder={'To'}/>
                             </div>
-                            <div className={'submit-btn'}>
+                            <div className={styles.submitBtn}>
                                 <input type={"submit"} value={'Submit'}/>
                             </div>
                         </form>
@@ -45,7 +54,7 @@ const TicketAddModal = props => {
     }
 
     const handlerClose = (e) => {
-        if (e.target.id == 'modal') {
+        if (e.target.id === 'modal') {
             props.handleCloseModal()
         }
     }

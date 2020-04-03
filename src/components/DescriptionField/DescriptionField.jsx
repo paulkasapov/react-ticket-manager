@@ -1,10 +1,10 @@
 import React from 'react';
-import './DescriptionField.css'
+import styles from './DescriptionField.module.css'
 
 const DescriptionField = props => {
     return (
-        <div style={{backgroundColor: '#323232', padding: '7px'}}>
-            <div style={{color: '#626262'}}>{props.title}</div>
+        <div className={styles.wrapper}>
+            <div className={styles.title}>{props.title}</div>
             {props.renderContent()}
         </div>
     )

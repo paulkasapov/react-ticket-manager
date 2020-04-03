@@ -1,0 +1,47 @@
+.wrapper {
+    display: flex;
+    padding: 0px 23px;
+    height: 40px;
+    color: rgb(173, 173, 173);
+}
+
+.wrapperSelected {
+    display: flex;
+    padding: 0px 23px;
+    height: 40px;
+    color: rgb(230, 230, 230);
+    background-color: rgb(65, 65, 65);
+
+}
+
+.owner {
+    flex: 2 1 0%;
+    border-bottom: 1px solid rgb(33, 33, 33);
+}
+
+.ownerImg{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    padding: 5px 0px;
+}
+
+.reported {
+    padding: 11px 0px;
+    border-bottom: 1px solid rgb(33, 33, 33);
+    flex: 5 1 0%;
+}
+
+.asset {
+    padding: 11px 0px;
+    border-bottom: 1px solid rgb(33, 33, 33);
+    flex: 6 1 0%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.status {
+    padding: 6px 0px 0px;
+    border-bottom: 1px solid rgb(33, 33, 33);
+    flex: 2 1 0%;
+}

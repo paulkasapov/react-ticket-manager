@@ -1,3 +1,5 @@
+
+
 .modal {
     background-color: rgba(50, 50, 50, 0.8);
     height: 100%;
@@ -7,13 +9,13 @@
     top: 0px;
 }
 
-.modal-content {
+.modalContent {
     background-color: rgb(80, 80, 80);
     width: 80%;
     margin: 10% auto;
 }
 
-.modal-content > form {
+.modalContent > form {
     padding: 10px;
     border-radius: 3px;
     -webkit-box-shadow: 0 0 3px 3px rgba(90,90, 90, 0.8);
@@ -21,7 +23,7 @@
     box-shadow:         0 0 3px 3px rgba(90,90, 90, 0.8);
 }
 
-.form-field > input, .form-field > textarea {
+.formField > input, .formField > textarea {
     height: 30px;
     background-color: #252525;
     border: 1px solid #3e3e3e;
@@ -30,48 +32,48 @@
     box-sizing: border-box;
 }
 
-.name-field > input, .description-field > textarea {
+.nameField > input, .descriptionField > textarea {
     width: calc(100% - 105px);
 }
 
-.description-field > textarea {
+.descriptionField > textarea {
     height: 80px;
     resize: none;
     vertical-align: top;
 }
 
-.status-field, .geocode-field, .kilometers-field {
+.statusField, .geocodeField, .kilometersField {
     display: inline-block;
     margin-right: 15px;
 }
 
-.geocode-field > input, .kilometers-field > input {
+.geocodeField > input, .kilometersField > input {
     width: 70px;
     margin-left: 5px;
 }
 
-.form-field {
+.formField {
     margin-bottom: 5px;
 }
 
-.form-field > p {
+.formField > p {
     width: 100px;
     display: inline-block;
     padding: 5px 0;
     margin: 0;
 }
 
-.geocode-field > p, .kilometers-field > p {
+.geocodeField > p, .kilometersField > p {
     width: auto;
 }
 
-.submit-btn {
+.submitBtn {
     position: relative;
     margin-top: 10px;
     height: 25px;
 }
 
-.status-field > select, .status-field > select > option, .submit-btn > input {
+.statusField > select, .statusField > select > option, .submitBtn > input {
     padding: 5px 0px;
     border: 1px solid rgb(33, 33, 33);
     border-radius: 3px;
@@ -80,21 +82,21 @@
     color: inherit;
 }
 
-.submit-btn > input {
+.submitBtn > input {
     position: absolute;
     right: 10px;
     padding: 5px;
     background-color: rgb(70, 70, 70);
 }
 
-.status-field .assigned-select {
+.statusField .assignedSelect {
     color: #ffc11a
 }
 
-.status-field .unassigned-select {
+.statusField .unassignedSelect {
     color: #707070
 }
 
-.status-field .completed-select {
+.statusField .completedSelect {
     color: #0bb141
 }

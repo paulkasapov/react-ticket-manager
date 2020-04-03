@@ -1,0 +1,38 @@
+.wrapper {
+    height: calc(100vh - 120px);
+    overflow: auto;
+}
+
+.ownerField {
+    background-color: rgb(50, 50, 50);
+    padding: 3px;
+}
+
+.ownerImg {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.ownerText {
+    display: inline-block;
+    vertical-align: top;
+    padding: 2px 0px 0px 10px;
+}
+
+.ownerSpeciality {
+    text-transform: uppercase;
+    font-size: 8px;
+}
+
+.location {
+    padding: 3px 0px;
+    text-align: center;
+    width: 60px;
+    border: 1px solid rgb(33, 33, 33);
+    border-radius: 3px;
+    font-weight: 500;
+    display: inline-block;
+    margin: 3px 3px 0px 0px;
+}
