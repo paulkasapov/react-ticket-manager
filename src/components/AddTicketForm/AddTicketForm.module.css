@@ -1,0 +1,95 @@
+.formField {
+    margin-bottom: 5px;
+}
+
+.label {
+    width: 100px;
+    display: inline-block;
+    padding: 5px 0;
+    margin: 0;
+}
+
+.nameInput {
+    width: calc(100% - 105px);
+    height: 30px;
+    background-color: #252525;
+    border: 1px solid #3e3e3e;
+    color: #9b9b98;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.descriptionInput {
+    width: calc(100% - 105px);
+    height: 80px;
+    resize: none;
+    vertical-align: top;
+    background-color: #252525;
+    border: 1px solid #3e3e3e;
+    color: #9b9b98;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.formFieldSmall {
+    margin-bottom: 5px;
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.smallInput {
+    width: 70px;
+    margin-left: 5px;
+    height: 30px;
+    background-color: #252525;
+    border: 1px solid #3e3e3e;
+    color: #9b9b98;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+:nth-child(n+1 of .formFieldSmall){
+    width: auto;
+    background-color: #0bb141;
+    color: red;
+}
+
+.select {
+    padding: 5px 0px;
+    border: 1px solid rgb(33, 33, 33);
+    border-radius: 3px;
+    background-color: rgb(80, 80, 80);
+    color: inherit;
+}
+
+.optionUnassigned {
+    color: #707070
+}
+
+.optionAssigned {
+    color: #ffc11a
+}
+
+.optionCompleted {
+    color: #0bb141
+}
+
+.submitWrapper {
+    position: relative;
+    margin-top: 10px;
+    height: 25px;
+}
+
+.submitBtn {
+    position: absolute;
+    right: 10px;
+    padding: 5px;
+    background-color: rgb(70, 70, 70);
+    border: 1px solid rgb(33, 33, 33);
+    border-radius: 3px;
+    color: inherit;
+}
+
+.autoWidth>p {
+    width: auto;
+}

@@ -2,7 +2,8 @@ import React from 'react';
 import './App.css';
 import {Sidebar} from './components/Sidebar/Sidebar'
 import {Content} from './components/Content/Content'
-import {TicketAddModal} from "./components/TicketAddModal/TicketAddModal";
+import {Modal} from "./components/Modal/Modal";
+import {AddTicketForm} from "./components/AddTicketForm/AddTicketForm";
 
 const shortedStatus = {
     assigned: {
@@ -19,12 +20,15 @@ const shortedStatus = {
     }
 }
 
+const addTicketForm = <AddTicketForm/>
+
 class App extends React.Component {
 
     state = {
         data: [],
         selectedTicket: '',
-        isModalOpen: false
+        isModalOpen: false,
+        modalContent: ''
     }
 
     componentDidMount() {
@@ -35,12 +39,23 @@ class App extends React.Component {
         this.setState({selectedTicket: selectedTicket})
     }
 
-    handleOpenModal = () => {
-        this.setState({isModalOpen: true})
+    handleOpenAddTicketModal = (content) => {
+        this.setState({isModalOpen: true, modalContent: content})
     }
 
     handleCloseModal = () => {
         this.setState({isModalOpen: false})
+    }
+
+    showModal = () => {
+        if (this.state.isModalOpen) {
+            return (
+                <Modal handleCloseModal={this.handleCloseModal} isModalOpen={this.state.isModalOpen}>
+                    {this.state.modalContent}
+                </Modal>
+            )
+        }
+        return true
     }
 
     renderStatus = (status) => {
@@ -83,7 +98,7 @@ class App extends React.Component {
                     position: 'relative',
                 }}>
                     <div>Tickets</div>
-                    <button onClick={this.handleOpenModal} style={{
+                    <button onClick={() => this.handleOpenAddTicketModal(<AddTicketForm/>)} style={{
                         border: '1px solid rgb(33, 33, 33)',
                         borderRadius: '3px',
                         backgroundColor: 'rgb(114, 58, 232)',
@@ -106,8 +121,7 @@ class App extends React.Component {
                              selectedTicket={this.state.selectedTicket}
                              renderStatus={this.renderStatus}/>
                 </div>
-                <TicketAddModal handleCloseModal={this.handleCloseModal}
-                                isModalOpen={this.state.isModalOpen}/>
+                {this.showModal()}
             </div>
 
         )

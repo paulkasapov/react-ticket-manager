@@ -1,0 +1,19 @@
+.modal {
+    background-color: rgba(50, 50, 50, 0.8);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+.modalContent {
+    background-color: rgb(80, 80, 80);
+    width: 700px;
+    margin: 10% auto 0;
+    padding: 10px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 0 3px 3px rgba(90,90, 90, 0.8);
+    -moz-box-shadow:    0 0 3px 3px rgba(90,90, 90, 0.8);
+    box-shadow:         0 0 3px 3px rgba(90,90, 90, 0.8);
+}
