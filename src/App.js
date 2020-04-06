@@ -20,15 +20,21 @@ const shortedStatus = {
     }
 }
 
-const addTicketForm = <AddTicketForm/>
-
 class App extends React.Component {
 
     state = {
         data: [],
         selectedTicket: '',
         isModalOpen: false,
-        modalContent: ''
+        modalContent: '',
+        lastTicketId: 1,
+        currentUser:  {
+            userId: 4,
+            firstName: 'Pavel',
+            lastName: 'Kasapov',
+            avatar: '../assets/default-avatar.png',
+            specialities: ['Programmer']
+        }
     }
 
     componentDidMount() {
@@ -73,19 +79,29 @@ class App extends React.Component {
         }}>{shortedStatus[status].text}</div>
     }
 
+    handleAddTicket = (ticket) => {
+        this.setState(state => {
+            state.data.push(ticket)
+            state.lastTicketId++
+        })
+        console.log(this.state.lastTicketId)
+    }
+
     getData = async () => {
         try {
             const res = await fetch("https://raw.githubusercontent.com/Tapify/public-code-test/master/web-ui-test/tickets.json");
             // const res = await fetch('http://127.0.0.1:3030/api/tickets');
             const data = await res.json();
-            this.setState({data: data})
-            console.log(data)
+            console.log(data);
+            this.setState({data: data, lastTicketId: data[data.length - 1].ticketId})
         } catch (e) {
             console.error('Ошибка:', e)
         }
     }
 
     render() {
+        console.log('Общий рендер')
+        console.log(this.state.data);
         return (
             <div style={styles.wrapper}>
                 <div style={{
@@ -98,7 +114,8 @@ class App extends React.Component {
                     position: 'relative',
                 }}>
                     <div>Tickets</div>
-                    <button onClick={() => this.handleOpenAddTicketModal(<AddTicketForm/>)} style={{
+                    <button onClick={() => this.handleOpenAddTicketModal(<AddTicketForm lastTicketId={this.state.lastTicketId} currentUser={this.state.currentUser} handleAddTicket={this.handleAddTicket}/>)}
+                            style={{
                         border: '1px solid rgb(33, 33, 33)',
                         borderRadius: '3px',
                         backgroundColor: 'rgb(114, 58, 232)',
