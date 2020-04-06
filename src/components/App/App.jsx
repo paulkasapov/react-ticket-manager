@@ -17,7 +17,7 @@ const App = () => {
             userId: 4,
             firstName: 'Pavel',
             lastName: 'Kasapov',
-            avatar: 'http://localhost:3000/default-avatar.png',
+            avatar: '/default-avatar.png',
             specialities: ['Programmer']
         }
     });
