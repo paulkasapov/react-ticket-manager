@@ -48,7 +48,7 @@
     box-sizing: border-box;
 }
 
-:nth-child(n+1 of .formFieldSmall){
+:nth-child(n+1 of .formFieldSmall) {
     width: auto;
     background-color: #0bb141;
     color: red;
@@ -90,6 +90,6 @@
     color: inherit;
 }
 
-.autoWidth>p {
+.autoWidth > p {
     width: auto;
 }

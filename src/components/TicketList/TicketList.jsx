@@ -4,15 +4,17 @@ import styles from './TicketList.module.css'
 
 const TicketList = props => {
 
+    const {selectedTicket, setSelected, data} = props;
+
     const renderTickets = () => {
+
         return (
-            props.data.map((item) => <Ticket key={item.ticketId}
-                                                  ticket={item}
-                                                  selectedTicket={props.selectedTicket}
-                                                  setSelected={props.setSelected}
-                                                  renderStatus={props.renderStatus}/>)
+            data.map((item) => <Ticket key={item.ticketId}
+                                       ticket={item}
+                                       selectedTicket={selectedTicket}
+                                       setSelected={setSelected}/>)
         )
-    }
+    };
 
     return (
         <div className={styles.wrapper}>
@@ -27,6 +29,6 @@ const TicketList = props => {
             </div>
         </div>
     )
-}
+};
 
 export {TicketList};

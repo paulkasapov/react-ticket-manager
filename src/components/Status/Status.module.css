@@ -1,0 +1,11 @@
+.status {
+    padding: 3px 0px;
+    text-align: center;
+    width: 40px;
+    border: 1px solid rgb(33, 33, 33);
+    border-radius: 3px;
+    font-weight: 500;
+    display: inline-block;
+    margin-top: 3px;
+    font-size: 10px;
+}
