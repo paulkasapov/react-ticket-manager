@@ -17,6 +17,7 @@ const AddTicketForm = (props) => {
     const handleInput = (event) => {
         const {value, name} = event.currentTarget;
         setState((prevState) => ({...prevState, [name]: value,}));
+        console.log(name, value)
     };
 
     const handleSubmit = (e) => {
@@ -42,7 +43,7 @@ const AddTicketForm = (props) => {
     };
 
     return (
-        <form className={styles.wrapper} autocomplete={'off'}>
+        <form className={styles.wrapper} autoComplete={'off'}>
             <div className={styles.closeBtnWrapper}>
                 <button onClick={closeModal} className={styles.closeBtn}>x</button>
             </div>
@@ -59,7 +60,7 @@ const AddTicketForm = (props) => {
                 <select className={styles.select} name='status' onChange={handleInput}>
                     <option className={styles.optionUnassigned} value={'unassigned'}>UNA</option>
                     <option className={styles.optionAssigned} value={'assigned'}>ASD</option>
-                    <option className={styles.optionCompleted} value={'complete'}>COM</option>
+                    <option className={styles.optionCompleted} value={'completed'}>COM</option>
                 </select>
             </div>
             <div className={`${styles.formFieldSmall} ${styles.autoWidth}`}>

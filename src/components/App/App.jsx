@@ -33,7 +33,7 @@ const App = () => {
         const index = data.indexOf(state.selectedTicket);
         if (index !== -1) {
             data.splice(index, 1);
-            setState((prevState) => ({...prevState, data: data, isModalOpen: false}))
+            setState((prevState) => ({...prevState, data: data, isModalOpen: false, selectedTicket: ''}))
         }
     };
 
