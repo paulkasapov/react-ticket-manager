@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import styles from './AddTicketForm.module.css'
 
-
 const AddTicketForm = (props) => {
 
     const [state, setState] = useState({
@@ -13,7 +12,7 @@ const AddTicketForm = (props) => {
         kmTo: '',
     });
 
-    const {lastTicketId, currentUser, handleAddTicket} = props;
+    const {lastTicketId, currentUser, handleAddTicket, closeModal} = props;
 
     const handleInput = (event) => {
         const {value, name} = event.currentTarget;
@@ -43,7 +42,10 @@ const AddTicketForm = (props) => {
     };
 
     return (
-        <form>
+        <form className={styles.wrapper}  autocomplete={'off'}>
+            <div className={styles.closeBtnWrapper}>
+                <button onClick={closeModal} className={styles.closeBtn}>x</button>
+            </div>
             <div className={styles.formField}>
                 <p className={styles.label}>Ticket name</p>
                 <input className={styles.nameInput} type={'text'} name='name' onChange={handleInput}/>

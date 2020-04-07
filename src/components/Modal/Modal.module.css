@@ -9,7 +9,8 @@
 
 .modalContent {
     background-color: rgb(80, 80, 80);
-    width: 700px;
+    max-width: 700px;
+    width: fit-content;
     margin: 10% auto 0;
     padding: 10px;
     border-radius: 3px;

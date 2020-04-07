@@ -4,6 +4,7 @@ import {Sidebar} from '../../components/Sidebar/Sidebar'
 import {Content} from '../../components/Content/Content'
 import {Modal} from "../../components/Modal/Modal";
 import {AddTicketForm} from "../../components/AddTicketForm/AddTicketForm";
+import {DeleteModal} from "../DeleteModal/DeleteModal";
 
 const App = () => {
 
@@ -25,6 +26,20 @@ const App = () => {
     useEffect(() => {
         getData();
     }, []);
+
+    const deleteTicket = () => {
+        console.log('deleted')
+        const data = [...state.data];
+        const index = data.indexOf(state.selectedTicket);
+        if (index !== -1) {
+            data.splice(index, 1);
+            setState((prevState) => ({...prevState, data: data, isModalOpen: false}))
+        }
+    }
+
+    const openDeleteModal = () => {
+        setState((prevState) => ({...prevState, isModalOpen: true, modalContent: <DeleteModal deleteTicket={deleteTicket} closeModal={handleCloseModal}/>}))
+    }
 
     const setSelected = (selectedTicket) => {
         setState((prevState) => ({...prevState, selectedTicket: selectedTicket}))
@@ -70,12 +85,13 @@ const App = () => {
     };
 
     console.log(state.data);
+    console.log(state.selectedTicket.id)
     return (
         <div className={styles.wrapper}>
             <div className={styles.header}>
                 <div>Tickets</div>
                 <button onClick={() => handleOpenAddTicketModal(<AddTicketForm
-                    lastTicketId={state.lastTicketId} currentUser={state.currentUser}
+                    lastTicketId={state.lastTicketId} currentUser={state.currentUser} closeModal={handleCloseModal}
                     handleAddTicket={handleAddTicket}/>)}
                         className={styles.addBtn}>
                     +
@@ -86,7 +102,7 @@ const App = () => {
                          selectedTicket={state.selectedTicket}
                          setSelected={setSelected}/>
 
-                <Content selectedTicket={state.selectedTicket}/>
+                <Content selectedTicket={state.selectedTicket} openDeleteModal={openDeleteModal}/>
             </div>
             {showModal()}
         </div>
