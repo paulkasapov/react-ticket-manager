@@ -28,18 +28,22 @@ const App = () => {
     }, []);
 
     const deleteTicket = () => {
-        console.log('deleted')
+        console.log('deleted');
         const data = [...state.data];
         const index = data.indexOf(state.selectedTicket);
         if (index !== -1) {
             data.splice(index, 1);
             setState((prevState) => ({...prevState, data: data, isModalOpen: false}))
         }
-    }
+    };
 
     const openDeleteModal = () => {
-        setState((prevState) => ({...prevState, isModalOpen: true, modalContent: <DeleteModal deleteTicket={deleteTicket} closeModal={handleCloseModal}/>}))
-    }
+        setState((prevState) => ({
+            ...prevState,
+            isModalOpen: true,
+            modalContent: <DeleteModal deleteTicket={deleteTicket} closeModal={handleCloseModal}/>
+        }))
+    };
 
     const setSelected = (selectedTicket) => {
         setState((prevState) => ({...prevState, selectedTicket: selectedTicket}))
@@ -85,7 +89,6 @@ const App = () => {
     };
 
     console.log(state.data);
-    console.log(state.selectedTicket.id)
     return (
         <div className={styles.wrapper}>
             <div className={styles.header}>

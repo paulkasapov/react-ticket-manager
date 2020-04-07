@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from './DeleteModal.module.css'
 
-const DeleteModal  = (props) => {
-    const {deleteTicket, closeModal} = props
+const DeleteModal = (props) => {
+    const {deleteTicket, closeModal} = props;
     return (
         <>
             <div className={styles.text}>Are you sure to delete this ticket?</div>
@@ -12,6 +12,6 @@ const DeleteModal  = (props) => {
             </div>
         </>
     )
-}
+};
 
 export {DeleteModal};

@@ -42,7 +42,7 @@ const AddTicketForm = (props) => {
     };
 
     return (
-        <form className={styles.wrapper}  autocomplete={'off'}>
+        <form className={styles.wrapper} autocomplete={'off'}>
             <div className={styles.closeBtnWrapper}>
                 <button onClick={closeModal} className={styles.closeBtn}>x</button>
             </div>
