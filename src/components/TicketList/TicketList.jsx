@@ -4,14 +4,13 @@ import styles from './TicketList.module.css'
 
 const TicketList = props => {
 
-    const {selectedTicket, setSelected, data} = props;
+    const {setSelected, data} = props;
 
     const renderTickets = () => {
 
         return (
             data.map((item) => <Ticket key={item.ticketId}
                                        ticket={item}
-                                       selectedTicket={selectedTicket}
                                        setSelected={setSelected}/>)
         )
     };

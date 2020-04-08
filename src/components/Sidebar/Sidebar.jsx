@@ -9,7 +9,7 @@ const Sidebar = (props) => {
         currentFilter: ''
     });
 
-    const {data, selectedTicket, setSelected} = props;
+    const {data, setSelected} = props;
 
     const handleFilter = () => {
         let filteredData = data;
@@ -28,7 +28,6 @@ const Sidebar = (props) => {
         <div className={styles.sidebar}>
             <Searchbar handleFilterChange={handleFilterChange}/>
             <TicketList data={handleFilter()}
-                        selectedTicket={selectedTicket}
                         setSelected={setSelected}/>
         </div>
     )

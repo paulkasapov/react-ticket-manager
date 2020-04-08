@@ -15,3 +15,9 @@
     border-radius: 3px;
     color: inherit;
 }
+
+.noLinkStyles {
+    cursor: inherit;
+    text-decoration: inherit;
+    color: inherit;
+}
