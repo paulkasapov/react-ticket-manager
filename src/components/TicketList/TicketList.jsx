@@ -1,17 +1,17 @@
 import React from 'react'
-import {Ticket} from '../Ticket/Ticket'
+import Ticket from '../Ticket/Ticket'
 import styles from './TicketList.module.css'
+import {useSelector} from "react-redux";
 
 const TicketList = props => {
 
-    const {setSelected, data} = props;
+    const {searchTerm} = props;
+    const data = useSelector(state => state.tickets.items);
 
     const renderTickets = () => {
-
         return (
-            data.map((item) => <Ticket key={item.ticketId}
-                                       ticket={item}
-                                       setSelected={setSelected}/>)
+            data.filter(ticket => ticket.asset.name.toLowerCase().includes(searchTerm.toLowerCase().trim()))
+                .map((item) => <Ticket key={item.ticketId} ticket={item}/>)
         )
     };
 
@@ -30,4 +30,4 @@ const TicketList = props => {
     )
 };
 
-export {TicketList};
+export default TicketList

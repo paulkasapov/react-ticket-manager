@@ -13,4 +13,4 @@ const DescriptionField = (props) => {
     )
 };
 
-export {DescriptionField};
+export default DescriptionField

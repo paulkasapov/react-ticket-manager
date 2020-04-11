@@ -1,7 +1,9 @@
 import React, {useState} from 'react'
-import styles from './AddTicketForm.module.css'
+import styles from './AddTicketModal.module.css'
+import {useDispatch, useSelector} from "react-redux";
+import {addTicket, changeSelectedTicketId, closeModal} from "../../redux/actions";
 
-const AddTicketForm = (props) => {
+const AddTicketModal = () => {
 
     const [state, setState] = useState({
         name: '',
@@ -10,9 +12,18 @@ const AddTicketForm = (props) => {
         geoCode: '',
         kmFrom: '',
         kmTo: '',
+        currentUser: {
+            userId: 4,
+            firstName: 'Pavel',
+            lastName: 'Kasapov',
+            avatar: '/default-avatar.png',
+            specialities: ['Programmer']
+        }
     });
 
-    const {lastTicketId, currentUser, handleAddTicket, closeModal} = props;
+    const dispatch = useDispatch();
+    const data = useSelector(state => state.tickets.items);
+    const lastTicketId = data[data.length - 1].ticketId;
 
     const handleInput = (event) => {
         const {value, name} = event.currentTarget;
@@ -27,7 +38,7 @@ const AddTicketForm = (props) => {
             ticketId: lastTicketId + 1,
             number: `PU-OV-${lastTicketId + 1}`,
             lastUpdatedTime: now,
-            owner: currentUser,
+            owner: state.currentUser,
             reporterTime: now,
             status: state.status,
             description: state.description,
@@ -39,13 +50,15 @@ const AddTicketForm = (props) => {
                 kmTo: +state.kmTo,
             }
         };
-        handleAddTicket(ticket)
+        dispatch(addTicket(ticket));
+        dispatch(changeSelectedTicketId(lastTicketId + 1));
+        dispatch(closeModal())
     };
 
     return (
         <form className={styles.wrapper} autoComplete={'off'}>
             <div className={styles.closeBtnWrapper}>
-                <button onClick={closeModal} className={styles.closeBtn}>x</button>
+                <button onClick={() => dispatch(closeModal())} className={styles.closeBtn}>x</button>
             </div>
             <div className={styles.formField}>
                 <p className={styles.label}>Ticket name</p>
@@ -79,7 +92,6 @@ const AddTicketForm = (props) => {
             </div>
         </form>
     )
-
 };
 
-export {AddTicketForm};
+export default AddTicketModal

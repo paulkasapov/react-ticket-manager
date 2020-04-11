@@ -1,10 +1,9 @@
 import React from 'react'
-import {DescriptionCard} from "../DescriptionCard/DescriptionCard";
-import {DescriptionField} from "../DescriptionField/DescriptionField";
-import {Status} from "../Status/Status";
+import DescriptionCard from "../DescriptionCard/DescriptionCard";
+import DescriptionField from "../DescriptionField/DescriptionField";
+import Status from "../Status/Status";
 import moment from "moment";
 import styles from './TicketDescription.module.css'
-
 
 const TicketDescription = (props) => {
 
@@ -57,4 +56,4 @@ const TicketDescription = (props) => {
     )
 };
 
-export {TicketDescription};
+export default TicketDescription

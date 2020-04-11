@@ -13,4 +13,4 @@ const DescriptionCard = (props) => {
     )
 };
 
-export {DescriptionCard};
+export default DescriptionCard

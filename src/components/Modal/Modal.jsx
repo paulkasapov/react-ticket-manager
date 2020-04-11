@@ -1,19 +1,16 @@
 import React from 'react'
 import styles from './Modal.module.css'
-// import cx from 'classnames'
+import {useDispatch} from "react-redux";
+import {closeModal} from "../../redux/actions";
 
 const Modal = (props) => {
 
-    // const className = cx(styles.customBox, {
-    //     [styles.tiny]:size === 'sm',
-    //     [styles.medium]:size === 'md',
-    // })
-
-    const {handleCloseModal, children} = props;
+    const {children} = props;
+    const dispatch = useDispatch();
 
     const handlerClose = (e) => {
         if (e.target.id === 'modal') {
-            handleCloseModal()
+            dispatch(closeModal())
         }
     };
 
@@ -26,4 +23,4 @@ const Modal = (props) => {
     )
 };
 
-export {Modal};
+export default Modal

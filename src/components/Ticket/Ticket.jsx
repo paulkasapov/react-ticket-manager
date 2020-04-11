@@ -1,14 +1,20 @@
 import React from 'react'
 import moment from "moment";
 import styles from './Ticket.module.css'
-import {Status} from "../Status/Status";
+import Status from "../Status/Status";
 import {NavLink} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {changeSelectedTicketId} from "../../redux/actions";
 
 const Ticket = (props) => {
-    const {ticket, setSelected} = props;
+    const {ticket} = props;
+    const dispatch = useDispatch()
+
     return (
-        <NavLink to={'/id/' + ticket.ticketId} onClick={() => setSelected(ticket)}
-                 className={styles.wrapper} activeClassName={styles.wrapperSelected}>
+        <NavLink to={'/id/' + ticket.ticketId}
+                 className={styles.wrapper}
+                 onClick={() => dispatch(changeSelectedTicketId(ticket.ticketId))}
+                 activeClassName={styles.wrapperSelected}>
             <div className={styles.owner}>
                 <img src={ticket.owner.avatar} className={styles.ownerImg} alt={'avatar'}/>
             </div>
@@ -19,4 +25,4 @@ const Ticket = (props) => {
     )
 };
 
-export {Ticket};
+export default Ticket

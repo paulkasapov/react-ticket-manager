@@ -4,14 +4,14 @@ import styles from './SearchBar.module.css'
 
 const Searchbar = (props) => {
 
-    const {handleFilterChange} = props;
+    const {handleSearchTermChange} = props;
 
     return (
         <div className={styles.wrapper}>
             <img src={Search} alt={'Search icon'} className={styles.searchImg}/>
-            <input onChange={handleFilterChange} className={styles.searchInput}/>
+            <input onChange={(e) => handleSearchTermChange(e.target.value)} className={styles.searchInput}/>
         </div>
     )
 };
 
-export {Searchbar};
+export default Searchbar

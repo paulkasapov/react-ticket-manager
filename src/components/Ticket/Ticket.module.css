@@ -8,13 +8,8 @@
 }
 
 .wrapperSelected {
-    display: flex;
-    padding: 0px 23px;
-    height: 40px;
     color: rgb(230, 230, 230);
     background-color: rgb(65, 65, 65);
-    cursor: inherit;
-    text-decoration: inherit;
 }
 
 .owner {

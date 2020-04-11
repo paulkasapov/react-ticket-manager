@@ -24,4 +24,4 @@ const Status = (props) => {
                 style={{color: shortedStatus[status].color}}>{shortedStatus[status].text}</div>
 };
 
-export {Status};
+export default Status
