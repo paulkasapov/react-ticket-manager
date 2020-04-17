@@ -6,3 +6,6 @@ export const CLOSE_MODAL = 'CLOSE_MODAL';
 export const CHANGE_SELECTED_TICKET_ID = 'CHANGE_SELECTED_TICKET_ID';
 export const DELETE_TICKET = 'DELETE_TICKET';
 export const ADD_TICKET = 'ADD_TICKET';
+export const LOG_IN = 'LOG_IN';
+export const LOG_OUT = 'LOG_OUT';
+export const ADD_USER = 'ADD_USER';

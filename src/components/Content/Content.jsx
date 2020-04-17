@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, { useEffect} from 'react'
 import TicketDescription from '../TicketDescription/TicketDescription'
 import moment from "moment";
 import Cross from '../../assets/cross.png'
@@ -13,7 +13,7 @@ const ShowDescription = (props) => {
     const {handleOpenModal, match: {params}} = props;
     const dispatch = useDispatch();
     const data = useSelector(state => state.tickets.items);
-    const selectedTicketId = useSelector(state => state.tickets.selectedTicketId)
+    const selectedTicketId = useSelector(state => state.tickets.selectedTicketId);
     const selectedTicket = data.find(item => item.ticketId === selectedTicketId);
 
     useEffect(() => {
@@ -62,16 +62,27 @@ const ShowNoDescription = () => {
 const Content = (props) => {
 
     const {selectedTicket, handleOpenModal} = props;
+    const isLoggedIn = useSelector(state => state.isLoggedIn);
 
     return (
-        <Switch>
-            <Route
-                path={'/id/:id'}
-                render={(props) => <ShowDescription {...props} selectedTicket={selectedTicket}
-                                                    handleOpenModal={handleOpenModal}/>}
-            />
-            <Route path={'/'} component={ShowNoDescription}/>
-        </Switch>
+        <>
+            {isLoggedIn ? (
+                <Switch>
+                    <Route
+                        path={'/id/:id'}
+                        render={(props) => <ShowDescription {...props} selectedTicket={selectedTicket}
+                                                            handleOpenModal={handleOpenModal}/>}
+                    />
+                    <Route path={'/'} component={ShowNoDescription}/>
+                </Switch>
+            ) : (
+                <div className={styles.wrapper}>
+                    <p>You should be logged in</p>
+                </div>
+            )
+            }
+        </>
+
     )
 };
 

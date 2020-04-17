@@ -23,9 +23,11 @@ const App = () => {
 
     const dispatch = useDispatch();
     const isModalOpen = useSelector(state => state.isModalOpen);
+    const isLoggedIn = useSelector(state => state.isLoggedIn);
 
     useEffect(() => {
-        dispatch(ticketsFetchData("https://raw.githubusercontent.com/Tapify/public-code-test/master/web-ui-test/tickets.json"));
+        // dispatch(ticketsFetchData("https://raw.githubusercontent.com/Tapify/public-code-test/master/web-ui-test/tickets.json"));
+        dispatch(ticketsFetchData("http://127.0.0.1:3030/api/tickets"));
     }, []);
 
     const handleOpenModal = (content) => {
@@ -49,13 +51,17 @@ const App = () => {
             <div className={styles.wrapper}>
                 <div className={styles.header}>
                     <div>Tickets</div>
-                    <button onClick={() => handleOpenModal(<AddTicketModal/>)}
-                            className={styles.addBtn}>
-                        +
-                    </button>
+                    {isLoggedIn ? (
+                        <button onClick={() => handleOpenModal(<AddTicketModal/>)}
+                                className={styles.addBtn}>
+                            +
+                        </button>
+                    ):(
+                        <></>
+                    )}
                 </div>
                 <div className={styles.content}>
-                    <Sidebar/>
+                    <Sidebar handleOpenModal={handleOpenModal}/>
                     <Content handleOpenModal={handleOpenModal}/>
                 </div>
                 {showModal()}

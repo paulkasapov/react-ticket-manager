@@ -23,12 +23,12 @@ const AddTicketModal = () => {
 
     const dispatch = useDispatch();
     const data = useSelector(state => state.tickets.items);
-    const lastTicketId = data[data.length - 1].ticketId;
+    let lastTicketId = 0;
+    if (data.length) {lastTicketId = data[data.length - 1].ticketId;}
 
     const handleInput = (event) => {
         const {value, name} = event.currentTarget;
         setState((prevState) => ({...prevState, [name]: value,}));
-        console.log(name, value)
     };
 
     const handleSubmit = (e) => {
@@ -39,7 +39,7 @@ const AddTicketModal = () => {
             number: `PU-OV-${lastTicketId + 1}`,
             lastUpdatedTime: now,
             owner: state.currentUser,
-            reporterTime: now,
+            reportedTime: now,
             status: state.status,
             description: state.description,
             asset: {

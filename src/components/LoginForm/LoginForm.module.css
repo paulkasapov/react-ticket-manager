@@ -1,0 +1,71 @@
+.wrapper {
+    background-color: rgb(50, 50, 50);
+    padding: 20px;
+}
+
+.formField {
+    margin-bottom: 5px;
+}
+
+.label {
+    width: 60px;
+    display: inline-block;
+    padding: 5px 0;
+    margin: 0;
+}
+
+.closeBtnWrapper {
+    position: relative;
+    height: 25px;
+}
+
+.textInput {
+    width: calc(100% - 65px);
+    height: 30px;
+    background-color: #252525;
+    border: 1px solid #3e3e3e;
+    color: #9b9b98;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.formFieldSmall {
+    margin-bottom: 5px;
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.smallInput {
+    width: 70px;
+    margin-left: 5px;
+    height: 30px;
+    background-color: #252525;
+    border: 1px solid #3e3e3e;
+    color: #9b9b98;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.submitWrapper {
+    position: relative;
+    margin-top: 10px;
+    height: 25px;
+}
+
+.submitBtn {
+    position: absolute;
+    right: 5px;
+    padding: 5px;
+    background-color: rgb(70, 70, 70);
+    border: 1px solid rgb(33, 33, 33);
+    border-radius: 3px;
+    color: inherit;
+}
+
+.autoWidth > p {
+    width: auto;
+}
+
+.registrationLink {
+    font-weight: bold;
+}
