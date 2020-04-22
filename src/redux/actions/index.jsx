@@ -12,6 +12,10 @@ import {
     LOG_OUT,
     ADD_USER
 } from "./type";
+//
+// if (process.env.NODE_ENV === 'development') {
+//     const url = 127.
+// }
 
 export const ticketsHasErrored = (bool) => {
     return {
@@ -37,7 +41,7 @@ export const ticketsFetchDataSuccess = (tickets) => {
 export const ticketsFetchData = (url) => {
     return (dispatch) => {
         dispatch(ticketsAreLoading(true));
-
+        console.log(process.env)
         fetch(url)
             .then((res) => {
                 if (res.err) {
@@ -82,7 +86,7 @@ export const deleteTicket = (id) => {
 };
 
 export const addTicket = (newTicket) => {
-    axios.post(`http://localhost:3030/api/tickets/add`, { ...newTicket })
+    axios.post(`https://nodejs-ticket-manager.herokuapp.com/api/tickets/add`, { ...newTicket })
         .then(res => {
             console.log(res);
             console.log(res.data);
@@ -95,7 +99,7 @@ export const addTicket = (newTicket) => {
 };
 
 export const addUser = (newUser) => {
-    axios.post(`http://localhost:3030/api/users/register`, { ...newUser })
+    axios.post(`https://nodejs-ticket-manager.herokuapp.com/api/users/register`, { ...newUser })
         .then(res => {
             console.log(res);
             console.log(res.data);
@@ -107,10 +111,16 @@ export const addUser = (newUser) => {
     }
 };
 
-export const logIn = () => {
-    return{
-        type: LOG_IN,
-    }
+export const logIn = (login, password) => {
+    // axios.post(`https://nodejs-ticket-manager.herokuapp.com/api/users/login`, { login, password })
+    axios.post(`https://localhost:3030/api/users/login`, { login, password })
+        .then(res => {
+            console.log(res)
+            return{
+                type: LOG_IN,
+            }
+        })
+
 };
 
 export const logOut = () => {
