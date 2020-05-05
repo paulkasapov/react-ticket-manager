@@ -1,12 +1,17 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import Ticket from '../Ticket/Ticket'
 import styles from './TicketList.module.css'
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {ticketsFetchData} from "../../redux/actions";
 
 const TicketList = props => {
 
     const {searchTerm} = props;
     const data = useSelector(state => state.tickets.items);
+
+    const dispatch = useDispatch();
+
+
 
     const renderTickets = () => {
         return (

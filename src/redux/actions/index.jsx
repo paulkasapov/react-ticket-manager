@@ -12,10 +12,6 @@ import {
     LOG_OUT,
     ADD_USER
 } from "./type";
-//
-// if (process.env.NODE_ENV === 'development') {
-//     const url = 127.
-// }
 
 export const ticketsHasErrored = (bool) => {
     return {
@@ -41,21 +37,21 @@ export const ticketsFetchDataSuccess = (tickets) => {
 export const ticketsFetchData = (url) => {
     return (dispatch) => {
         dispatch(ticketsAreLoading(true));
-        console.log(process.env)
-        fetch(url)
+        axios.get(`${process.env.REACT_APP_SERVER_URL}/api/tickets/`, {
+            headers : {'auth-token': localStorage.authToken}
+        } )
             .then((res) => {
                 if (res.err) {
                     throw res.err;
                 }
                 dispatch(ticketsAreLoading(false));
-                return res;
+                dispatch(ticketsFetchDataSuccess(res.data))
             })
-            .then((res) => res.json())
-            .then((tickets) => dispatch(ticketsFetchDataSuccess(tickets)))
             .catch((err) => {
                 dispatch(ticketsHasErrored(true));
                 console.log(err)
             });
+
     };
 };
 
@@ -79,6 +75,14 @@ export const changeSelectedTicketId = (id) => {
 };
 
 export const deleteTicket = (id) => {
+    axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/tickets/delete/${id}`,  {
+        headers : {'auth-token': localStorage.authToken}
+    } )
+        .then(res => {
+            console.log(res);
+            console.log(res.data);
+        })
+        .catch(error => console.log(error));
     return{
         type: DELETE_TICKET,
         id
@@ -86,7 +90,10 @@ export const deleteTicket = (id) => {
 };
 
 export const addTicket = (newTicket) => {
-    axios.post(`https://nodejs-ticket-manager.herokuapp.com/api/tickets/add`, { ...newTicket })
+    console.log(newTicket)
+    axios.post(`${process.env.REACT_APP_SERVER_URL}/api/tickets/add`, { ...newTicket }, {
+        headers : {'auth-token': localStorage.authToken}
+    } )
         .then(res => {
             console.log(res);
             console.log(res.data);
@@ -99,7 +106,7 @@ export const addTicket = (newTicket) => {
 };
 
 export const addUser = (newUser) => {
-    axios.post(`https://nodejs-ticket-manager.herokuapp.com/api/users/register`, { ...newUser })
+    axios.post(`${process.env.REACT_APP_SERVER_URL}/api/users/register`, { ...newUser })
         .then(res => {
             console.log(res);
             console.log(res.data);
@@ -111,20 +118,21 @@ export const addUser = (newUser) => {
     }
 };
 
-export const logIn = (login, password) => {
-    // axios.post(`https://nodejs-ticket-manager.herokuapp.com/api/users/login`, { login, password })
-    axios.post(`https://localhost:3030/api/users/login`, { login, password })
+export const logIn = (userName, password) => {
+    axios.post(`${process.env.REACT_APP_SERVER_URL}/api/users/login`, { userName, password })
         .then(res => {
-            console.log(res)
-            return{
-                type: LOG_IN,
-            }
+            localStorage.setItem('authToken', res.data)
         })
+        .catch(error => console.log(error));
+    return{
+        type: LOG_IN,
+    }
 
 };
 
 export const logOut = () => {
-    return{
-        type: LOG_OUT,
-    }
+    localStorage.removeItem('authToken')
+        return{
+            type: LOG_OUT,
+        }
 };

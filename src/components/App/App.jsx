@@ -7,7 +7,7 @@ import AddTicketModal from "../AddTicketModal/AddTicketModal";
 import { BrowserRouter } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { openModal, ticketsFetchData } from "../../redux/actions";
-require('dotenv').config()
+require('dotenv').config();
 
 const App = () => {
 
@@ -26,11 +26,8 @@ const App = () => {
     const isModalOpen = useSelector(state => state.isModalOpen);
     const isLoggedIn = useSelector(state => state.isLoggedIn);
 
-    console.log(process.env)
-
     useEffect(() => {
-        // dispatch(ticketsFetchData("https://raw.githubusercontent.com/Tapify/public-code-test/master/web-ui-test/tickets.json"));
-        dispatch(ticketsFetchData("http://127.0.0.1:3030/api/tickets"));
+        dispatch(ticketsFetchData(`${process.env.REACT_APP_SERVER_URL}/api/tickets`));
         // dispatch(ticketsFetchData("https://nodejs-ticket-manager.herokuapp.com/api/tickets"));
     }, []);
 

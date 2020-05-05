@@ -6,8 +6,8 @@ import RegistrationModal from "../RegistrationModal/RegistrationModal";
 
 const LoginForm = (props) => {
 
-    const [, setState] = useState({
-        username: '',
+    const [state, setState] = useState({
+        userName: '',
         password: '',
         currentUser: {
             userId: 4,
@@ -25,12 +25,11 @@ const LoginForm = (props) => {
     const handleInput = (event) => {
         const {value, name} = event.currentTarget;
         setState((prevState) => ({...prevState, [name]: value,}));
-        console.log(name, value)
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(logIn());
+        dispatch(logIn(state.userName, state.password));
         dispatch(closeModal())
     };
 
@@ -38,7 +37,7 @@ const LoginForm = (props) => {
         <form className={styles.wrapper} autoComplete={'off'}>
             <div className={styles.formField}>
                 <p className={styles.label}>Login</p>
-                <input className={styles.textInput} type={'text'} name='username' onChange={handleInput}/>
+                <input className={styles.textInput} type={'text'} name='userName' onChange={handleInput}/>
             </div>
             <div className={styles.formField}>
                 <p className={styles.label}>Password</p>
