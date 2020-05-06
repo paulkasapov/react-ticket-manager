@@ -35,3 +35,30 @@
     display: flex;
     height: calc(100% - 40px);
 }
+
+.headerName {
+    display: inline-block;
+}
+
+.userName {
+    display: inline-block;
+    float: right;
+    position: relative;
+    right: 50px;
+    font-weight: normal;
+}
+
+.logOutBtn {
+    background:none;
+    border:none;
+    color: inherit;
+    cursor: pointer;
+    font-size: 16px;
+    position: relative;
+    right: 5px;
+    font-weight: 700;
+}
+
+.logOutBtn:focus {
+    outline:none;
+}

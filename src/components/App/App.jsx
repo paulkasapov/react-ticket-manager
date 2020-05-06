@@ -6,7 +6,7 @@ import Modal from "../../components/Modal/Modal";
 import AddTicketModal from "../AddTicketModal/AddTicketModal";
 import { BrowserRouter } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { openModal, ticketsFetchData } from "../../redux/actions";
+import {logOut, openModal, ticketsFetchData, tokenLogIn} from "../../redux/actions";
 require('dotenv').config();
 
 const App = () => {
@@ -27,9 +27,18 @@ const App = () => {
     const isLoggedIn = useSelector(state => state.isLoggedIn);
 
     useEffect(() => {
-        dispatch(ticketsFetchData(`${process.env.REACT_APP_SERVER_URL}/api/tickets`));
-        // dispatch(ticketsFetchData("https://nodejs-ticket-manager.herokuapp.com/api/tickets"));
-    }, []);
+        dispatch(tokenLogIn())
+    }, [])
+
+    useEffect(() => {
+        if (isLoggedIn){
+            dispatch(ticketsFetchData(`${process.env.REACT_APP_SERVER_URL}/api/tickets`));
+        }
+    }, [isLoggedIn]);
+
+    const handleLogOut = () => {
+        dispatch(logOut());
+    }
 
     const handleOpenModal = (content) => {
         dispatch(openModal());
@@ -51,12 +60,15 @@ const App = () => {
         <BrowserRouter>
             <div className={styles.wrapper}>
                 <div className={styles.header}>
-                    <div>Tickets</div>
+                    <div className={styles.headerName}>Tickets</div>
                     {isLoggedIn ? (
-                        <button onClick={() => handleOpenModal(<AddTicketModal/>)}
-                                className={styles.addBtn}>
-                            +
-                        </button>
+                        <>
+                            <div className={styles.userName}>UserName <button className={styles.logOutBtn} onClick={handleLogOut}>x</button></div>
+                            <button onClick={() => handleOpenModal(<AddTicketModal/>)}
+                                    className={styles.addBtn}>
+                                +
+                            </button>
+                        </>
                     ):(
                         <></>
                     )}

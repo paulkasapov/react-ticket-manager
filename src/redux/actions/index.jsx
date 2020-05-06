@@ -119,15 +119,16 @@ export const addUser = (newUser) => {
 };
 
 export const logIn = (userName, password) => {
-    axios.post(`${process.env.REACT_APP_SERVER_URL}/api/users/login`, { userName, password })
-        .then(res => {
-            localStorage.setItem('authToken', res.data)
-        })
-        .catch(error => console.log(error));
-    return{
-        type: LOG_IN,
+    return (dispatch) => {
+        axios.post(`${process.env.REACT_APP_SERVER_URL}/api/users/login`, { userName, password })
+            .then(res => {
+                localStorage.setItem('authToken', res.data)
+                dispatch({
+                    type: LOG_IN,
+                })
+            })
+            .catch(error => console.log(error));
     }
-
 };
 
 export const logOut = () => {
@@ -135,4 +136,24 @@ export const logOut = () => {
         return{
             type: LOG_OUT,
         }
+};
+
+export const tokenLogIn = () => {
+    return (dispatch) => {
+        axios.post(`${process.env.REACT_APP_SERVER_URL}/api/users/token_login`, {}, {
+            headers : {'auth-token': localStorage.authToken}
+        })
+            .then(res => {
+                console.log(res)
+                dispatch({
+                    type: LOG_IN,
+                })
+            })
+            .catch(error => {
+                // console.log(error)
+                dispatch({
+                    type: "ERROR_HANDLE"
+                })
+            });
+    }
 };
