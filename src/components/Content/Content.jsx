@@ -31,7 +31,7 @@ const ShowDescription = (props) => {
 
                             </div>
                             <div className={styles.lastUpdated}>
-                                LAST UPDATED: {moment(selectedTicket.lastUpdatedTime).format('DD/MM/YY hh:mm')}
+                                LAST UPDATED: {moment(selectedTicket.lastUpdatedTime).format('DD/MM/YY HH:mm')}
 
                             </div>
                             <button className={styles.trash} onClick={() => handleOpenModal(<DeleteModal/>)}>

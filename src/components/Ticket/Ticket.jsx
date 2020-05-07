@@ -18,7 +18,7 @@ const Ticket = (props) => {
             <div className={styles.owner}>
                 <img src={ticket.owner.avatar} className={styles.ownerImg} alt={'avatar'}/>
             </div>
-            <div className={styles.reported}>{moment(ticket.reportedTime).format('DD/MM/YY hh:mm')}</div>
+            <div className={styles.reported}>{moment(ticket.reportedTime).format('DD/MM/YY HH:mm')}</div>
             <div className={styles.asset}>{ticket.asset.name}</div>
             <div className={styles.status}><Status status={ticket.status}/></div>
         </NavLink>
