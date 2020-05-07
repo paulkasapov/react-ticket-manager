@@ -23,27 +23,12 @@ export const validateRegistrationForm = (form) => {
     form.specialities.some((item) => {
         if ((item.length < 3) || (item.length > 20)) {
             errors.specialities = 'Length should be 3-20 letters'
+            return true
         }
+        return false
     })
     return errors
 };
-
-
-
-// export const validateLoginForm = (form) => {
-//     let errors = {
-//         userName: '',
-//         password: '',
-//     }
-//     if ((form.login.length < 3) || (form.login.length > 20)) {
-//         errors.login = 'Length should be 3-20 letters'
-//     }
-//     if ((form.password.length < 3) || (form.password.length > 20)) {
-//         errors.password = 'Length should be 3-20 letters'
-//     }
-//
-//     return errors
-// };
 
 export const validateAddTicketForm = (form) => {
 

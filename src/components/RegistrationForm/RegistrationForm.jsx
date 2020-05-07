@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import styles from './RegistrationForm.module.css'
 import {useDispatch} from "react-redux";
 import {addUser, closeModal} from "../../redux/actions";
-import {validateAddTicketForm, validateRegistrationForm} from '../../FormValidation'
+import {validateRegistrationForm} from '../../FormValidation'
 
 const RegistrationForm = () => {
 

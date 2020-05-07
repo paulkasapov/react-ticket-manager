@@ -39,7 +39,7 @@ const LoginForm = (props) => {
                 <input className={styles.textInput} type={'password'} name='password' onChange={handleInput}/>
             </div>
             <div className={styles.formField}>
-                <p>Not a member? <a className={styles.registrationLink} href={'#'} onClick={() => handleOpenModal(<RegistrationForm/>)}>Create your account</a></p>
+                <p>Not a member? <button className={styles.registrationLink} href={'#'} onClick={(e) => handleOpenModal(e, <RegistrationForm/>)}>Create your account</button></p>
             </div>
             <div className={styles.submitWrapper}>
                 <button className={styles.submitBtn} onClick={handleSubmit}>Sign In</button>

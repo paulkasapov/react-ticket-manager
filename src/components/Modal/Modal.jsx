@@ -1,18 +1,9 @@
 import React from 'react'
 import styles from './Modal.module.css'
-import {useDispatch} from "react-redux";
-import {closeModal} from "../../redux/actions";
 
 const Modal = (props) => {
 
     const {children} = props;
-    const dispatch = useDispatch();
-
-    // const handlerClose = (e) => {
-    //     if (e.target.id === 'modal') {
-    //         dispatch(closeModal())
-    //     }
-    // };
 
     return (
         <div className={styles.modal}>

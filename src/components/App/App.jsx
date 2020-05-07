@@ -28,19 +28,20 @@ const App = () => {
 
     useEffect(() => {
         dispatch(tokenLogIn())
-    }, [])
+    }, [dispatch])
 
     useEffect(() => {
         if (isLoggedIn){
             dispatch(ticketsFetchData(`${process.env.REACT_APP_SERVER_URL}/api/tickets`));
         }
-    }, [isLoggedIn]);
+    }, [dispatch, isLoggedIn]);
 
     const handleLogOut = () => {
         dispatch(logOut());
     }
 
-    const handleOpenModal = (content) => {
+    const handleOpenModal = (e, content) => {
+        e.preventDefault()
         dispatch(openModal());
         setState((prevState) => ({...prevState, modalContent: content}))
     };
