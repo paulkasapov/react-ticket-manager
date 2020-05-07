@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import styles from './LoginForm.module.css'
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {logIn} from "../../redux/actions";
 import RegistrationForm from "../RegistrationForm/RegistrationForm";
 
@@ -16,6 +16,7 @@ const LoginForm = (props) => {
     const {handleOpenModal} = props
 
     const dispatch = useDispatch();
+    const isSignInError = useSelector(state => state.errors.isSignInError)
 
     const handleInput = (event) => {
         const {value, name} = event.currentTarget;
@@ -40,6 +41,9 @@ const LoginForm = (props) => {
             <div className={styles.formField}>
                 <p>Not a member? <button type={'button'} className={styles.registrationLink} onClick={() => handleOpenModal(<RegistrationForm/>)}>Create your account</button></p>
             </div>
+            <p className={styles.errorMessage}>
+                {isSignInError ? ('Login or password is wrong'):('')}
+            </p>
             <div className={styles.submitWrapper}>
                 <button type={'submit'} className={styles.submitBtn} onClick={handleSubmit}>Sign In</button>
             </div>

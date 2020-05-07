@@ -35,7 +35,6 @@ const ticketsReducer = (state = initialState, action) => {
             };
 
         case ADD_TICKET:
-            console.log(action.newTicket)
             return {
                 ...state,
                 items: [...state.items, action.newTicket]

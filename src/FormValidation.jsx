@@ -49,7 +49,7 @@ export const validateAddTicketForm = (form) => {
     if (!form.kmTo) {
         errors.kmTo = 'You should set Kilometers To'
     }
-    if ((form.kmTo) && (form.kmFrom < form.kmTo)) {
+    if ((form.kmTo) && (form.kmFrom > form.kmTo)) {
         errors.kmTo = 'Kilometers To cannot be less than Kilometers From'
     }
 

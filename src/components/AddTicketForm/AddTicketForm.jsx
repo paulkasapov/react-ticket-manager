@@ -26,14 +26,12 @@ const AddTicketForm = () => {
 
     const handleInput = (event) => {
         const {value, name} = event.currentTarget;
-        setState((prevState) => ({...prevState, [name]: value,}));
+        setState((prevState) => ({...prevState, form:{...prevState.form, [name]: value}}));
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(state.form)
         const errors = validateAddTicketForm(state.form)
-        console.log(errors)
         setState((prevState) => ({...prevState, errors: errors}))
         if (Object.keys(errors).length === 0) {
             const now = JSON.parse(JSON.stringify({now: new Date()})).now;
@@ -41,7 +39,13 @@ const AddTicketForm = () => {
                 ticketId: lastTicketId + 1,
                 number: `PU-OV-${lastTicketId + 1}`,
                 lastUpdatedTime: now,
-                owner: currentUser,
+                owner: {
+                    userId: currentUser.userId,
+                    firstName: currentUser.firstName,
+                    lastName: currentUser.lastName,
+                    avatar: currentUser.avatar,
+                    specialities: currentUser.specialities,
+                },
                 reportedTime: now,
                 status: state.form.status,
                 description: state.form.description,

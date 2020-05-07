@@ -10,7 +10,10 @@ import {
     ADD_TICKET,
     LOG_IN,
     LOG_OUT,
-    ADD_USER
+    ADD_USER,
+    LOGIN_IS_UNIQUE,
+    ERROR_LOGIN_EXISTS,
+    ERROR_INVALID_SIGN_IN
 } from "./type";
 
 export const ticketsHasErrored = (bool) => {
@@ -81,7 +84,7 @@ export const deleteTicket = (id) => {
         .then(res => {
             console.log(res.data);
         })
-        .catch(error => console.log(error));
+        .catch(error => console.log(error.response));
     return{
         type: DELETE_TICKET,
         id
@@ -89,15 +92,10 @@ export const deleteTicket = (id) => {
 };
 
 export const addTicket = (newTicket) => {
-    console.log(newTicket)
     axios.post(`${process.env.REACT_APP_SERVER_URL}/api/tickets/add`, { ...newTicket }, {
         headers : {'auth-token': localStorage.authToken}
     } )
-        .then(res => {
-            console.log(res);
-            console.log(res.data);
-        })
-        .catch(error => console.log(error));
+        .catch(error => console.log(error.response));
     return{
         type: ADD_TICKET,
         newTicket
@@ -106,11 +104,7 @@ export const addTicket = (newTicket) => {
 
 export const addUser = (newUser) => {
     axios.post(`${process.env.REACT_APP_SERVER_URL}/api/users/register`, { ...newUser })
-        .then(res => {
-            console.log(res);
-            console.log(res.data);
-        })
-        .catch(error => console.log(error));
+        .catch(error => console.log(error.response));
     return{
         type: ADD_USER,
         newUser
@@ -127,7 +121,11 @@ export const logIn = (userName, password) => {
                     type: LOG_IN,
                 })
             })
-            .catch(error => console.log(error));
+            .catch(() => {
+                dispatch({
+                    type: ERROR_INVALID_SIGN_IN,
+                })
+            })
     }
 };
 
@@ -144,13 +142,29 @@ export const tokenLogIn = () => {
         axios.post(`${process.env.REACT_APP_SERVER_URL}/api/users/token_login`, {}, {
             headers : {'auth-token': localStorage.authToken}
         })
-            .then(res => {
-                console.log(res.data)
+            .then((res) => {
                 dispatch({
-                    userData: res.data,
                     type: LOG_IN,
+                    userData: res.data
                 })
             })
-            .catch((error) => console.log(error.response));
+            .catch((error) => console.log(error));
+    }
+};
+
+export const checkUniqueLogin = (userName) => {
+
+    return (dispatch) => {
+        axios.post(`${process.env.REACT_APP_SERVER_URL}/api/users/check_unique_login`, {userName})
+            .then(() => {
+                dispatch({
+                    type: LOGIN_IS_UNIQUE,
+                })
+            })
+            .catch(() => {
+                dispatch({
+                    type: ERROR_LOGIN_EXISTS,
+                })
+            })
     }
 };

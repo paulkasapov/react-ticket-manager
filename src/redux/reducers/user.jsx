@@ -5,7 +5,6 @@ const userReducer = (state = {}, action) => {
         case ADD_USER:
             return action.newUser
         case LOG_IN:
-            console.log(action)
             return action.userData
         default:
             return state;

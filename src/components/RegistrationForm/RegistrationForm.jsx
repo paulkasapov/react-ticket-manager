@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import styles from './RegistrationForm.module.css'
-import {useDispatch} from "react-redux";
-import {addUser, closeModal} from "../../redux/actions";
+import {useDispatch, useSelector} from "react-redux";
+import {addUser, checkUniqueLogin, closeModal} from "../../redux/actions";
 import {validateRegistrationForm} from '../../FormValidation'
 
 const RegistrationForm = () => {
@@ -16,16 +16,10 @@ const RegistrationForm = () => {
             specialities: []
         },
         errors: {},
-        currentUser: {
-            userId: 4,
-            firstName: 'Pavel',
-            lastName: 'Kasapov',
-            avatar: '/default-avatar.png',
-            specialities: ['Programmer']
-        }
     });
 
     const dispatch = useDispatch();
+    const errorNotUnique = useSelector(state => state.errors.isLoginExists)
 
     const handleInput = (e) => {
         const {value, name} = e.currentTarget;
@@ -45,9 +39,8 @@ const RegistrationForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const errors = validateRegistrationForm(state.form)
-        console.log(errors)
         setState((prevState) => ({...prevState, errors: errors}))
-        if (Object.keys(errors).length === 0) {
+        if ((Object.keys(errors).length === 0) && (!errorNotUnique)) {
             const user = {
                 userName: state.form.login,
                 password: state.form.password,
@@ -56,48 +49,9 @@ const RegistrationForm = () => {
                 avatar:'/default-avatar.png',
                 specialities: state.form.specialities
             };
-            console.log(user);
             dispatch(addUser(user));
             dispatch(closeModal())
         }
-    };
-
-    const validateTextField = (name, value) => {
-        if ((value.length < 3) || (value.length > 20)) {
-            setState((prevState) => ({...prevState, errors: {...prevState.errors, [name]: 'Length should be 3-20 letters'} }));
-            return true
-        }
-        setState((prevState) => ({...prevState, errors: {...prevState.errors, [name]: ''} }));
-        return false
-    };
-
-    const validateSpecialities = () => {
-        const specialities = state.form.specialities;
-        let hasValidationError = false;
-        if (specialities.length === 0) {
-            setState((prevState) => ({...prevState, errors: {...prevState.errors, specialities: 'Length should be 3-20 letters'} }));
-            return true
-        }
-        specialities.some((item) => {
-            if ((item.length < 3) || (item.length > 20)) {
-                setState((prevState) => ({...prevState, errors: {...prevState.errors, specialities: 'Length should be 3-20 letters'} }));
-                hasValidationError = true;
-                return true
-            }
-            return false
-        });
-        if (!hasValidationError) {
-            setState((prevState) => ({...prevState, errors: {...prevState.errors, specialities: ''} }));
-        }
-        return hasValidationError
-    };
-
-    const validateConfirmPassword = () => {
-        if (state.password !== state.confirmPassword) {
-            setState((prevState) => ({...prevState, errors: {...prevState.errors, confirmPassword: 'Passwords should match'} }));
-            return true
-        }
-        return false
     };
 
     return (
@@ -108,9 +62,11 @@ const RegistrationForm = () => {
             <div className={styles.formField}>
                 <div className={styles.labelWrapper}>
                     <p className={styles.label}>Login</p>
-                    <p className={styles.errorMessage}>{state.errors.login}</p>
+                    <p className={styles.errorMessage}>
+                        {errorNotUnique ? ('Such login is already exists'):(state.errors.login)}
+                    </p>
                 </div>
-                <input onBlur={(e) => validateTextField(e.currentTarget.name, e.currentTarget.value)}
+                <input onBlur={() => dispatch(checkUniqueLogin(state.form.login))}
                        className={styles.nameInput} type={'text'} name='login' required onChange={handleInput}/>
             </div>
             <div className={styles.formField}>
@@ -118,7 +74,7 @@ const RegistrationForm = () => {
                     <p className={styles.label}>Password</p>
                     <p className={styles.errorMessage}>{state.errors.password}</p>
                 </div>
-                <input onBlur={(e) => validateTextField(e.currentTarget.name, e.currentTarget.value)}
+                <input
                        className={styles.nameInput} type={'password'} name='password' required onChange={handleInput}/>
             </div>
             <div className={styles.formField}>
@@ -126,14 +82,14 @@ const RegistrationForm = () => {
                     <p className={styles.label}>Confirm Password</p>
                     <p className={styles.errorMessage}>{state.errors.confirmPassword}</p>
                 </div>
-                <input onBlur={(e) => validateConfirmPassword()} className={styles.nameInput} type={'password'} name='confirmPassword' required onChange={handleInput}/>
+                <input className={styles.nameInput} type={'password'} name='confirmPassword' required onChange={handleInput}/>
             </div>
             <div className={styles.formField}>
                 <div className={styles.labelWrapper}>
                     <p className={styles.label}>First Name</p>
                     <p className={styles.errorMessage}>{state.errors.firstName}</p>
                 </div>
-                <input onBlur={(e) => validateTextField(e.currentTarget.name, e.currentTarget.value)}
+                <input
                        className={styles.nameInput} type={'text'} name='firstName' required onChange={handleInput}/>
             </div>
             <div className={styles.formField}>
@@ -141,7 +97,7 @@ const RegistrationForm = () => {
                     <p className={styles.label}>Last Name</p>
                     <p className={styles.errorMessage}>{state.errors.lastName}</p>
                 </div>
-                <input onBlur={(e) => validateTextField(e.currentTarget.name, e.currentTarget.value)}
+                <input
                        className={styles.nameInput} type={'text'} name='lastName' required onChange={handleInput}/>
             </div>
             <div className={styles.formField}>
@@ -149,11 +105,11 @@ const RegistrationForm = () => {
                     <p className={styles.label}>Specialities (separate by ',')</p>
                     <p className={styles.errorMessage}>{state.errors.specialities}</p>
                 </div>
-                <input onBlur={(e) => validateSpecialities(e.currentTarget.name, e.currentTarget.value)}
+                <input
                        className={styles.nameInput} type={'text'} name='specialities' required onChange={handleInput}/>
             </div>
             <div className={styles.submitWrapper}>
-                <button className={styles.submitBtn} onClick={(e) => handleSubmit(e)}>Register</button>
+                <button className={styles.submitBtn} type={'submit'} onClick={(e) => handleSubmit(e)}>Register</button>
             </div>
         </form>
     )
