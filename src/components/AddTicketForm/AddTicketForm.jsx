@@ -16,17 +16,11 @@ const AddTicketForm = () => {
             kmTo: '',
         },
         errors: {},
-        currentUser: {
-            userId: 4,
-            firstName: 'Pavel',
-            lastName: 'Kasapov',
-            avatar: '/default-avatar.png',
-            specialities: ['Programmer']
-        }
     });
 
     const dispatch = useDispatch();
     const data = useSelector(state => state.tickets.items);
+    const currentUser = useSelector(state => state.currentUser)
     let lastTicketId = 0;
     if (data.length) {lastTicketId = data[data.length - 1].ticketId;}
 
@@ -37,6 +31,7 @@ const AddTicketForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(state.form)
         const errors = validateAddTicketForm(state.form)
         console.log(errors)
         setState((prevState) => ({...prevState, errors: errors}))
@@ -46,7 +41,7 @@ const AddTicketForm = () => {
                 ticketId: lastTicketId + 1,
                 number: `PU-OV-${lastTicketId + 1}`,
                 lastUpdatedTime: now,
-                owner: state.currentUser,
+                owner: currentUser,
                 reportedTime: now,
                 status: state.form.status,
                 description: state.form.description,

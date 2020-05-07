@@ -13,18 +13,12 @@ const App = () => {
 
     const [state, setState] = useState({
         modalContent: '',
-        currentUser: {
-            userId: 4,
-            firstName: 'Pavel',
-            lastName: 'Kasapov',
-            avatar: '/default-avatar.png',
-            specialities: ['Programmer']
-        }
     });
 
     const dispatch = useDispatch();
     const isModalOpen = useSelector(state => state.isModalOpen);
     const isLoggedIn = useSelector(state => state.isLoggedIn);
+    const userName = useSelector(state => state.currentUser.userName)
 
     useEffect(() => {
         dispatch(tokenLogIn())
@@ -40,8 +34,8 @@ const App = () => {
         dispatch(logOut());
     }
 
-    const handleOpenModal = (e, content) => {
-        e.preventDefault()
+    const handleOpenModal = (content) => {
+
         dispatch(openModal());
         setState((prevState) => ({...prevState, modalContent: content}))
     };
@@ -64,7 +58,7 @@ const App = () => {
                     <div className={styles.headerName}>Tickets</div>
                     {isLoggedIn ? (
                         <>
-                            <div className={styles.userName}>UserName <button className={styles.logOutBtn} onClick={handleLogOut}>x</button></div>
+                            <div className={styles.userName}>{userName} <button className={styles.logOutBtn} onClick={handleLogOut}>x</button></div>
                             <button onClick={() => handleOpenModal(<AddTicketForm/>)}
                                     className={styles.addBtn}>
                                 +

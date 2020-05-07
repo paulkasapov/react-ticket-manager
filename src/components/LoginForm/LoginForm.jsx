@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import styles from './LoginForm.module.css'
 import {useDispatch} from "react-redux";
-import {closeModal, logIn} from "../../redux/actions";
+import {logIn} from "../../redux/actions";
 import RegistrationForm from "../RegistrationForm/RegistrationForm";
 
 const LoginForm = (props) => {
@@ -25,11 +25,10 @@ const LoginForm = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(logIn(state.form.userName, state.form.password));
-        dispatch(closeModal())
     };
 
     return (
-        <form className={styles.wrapper} autoComplete={'off'}>
+        <form className={styles.wrapper} autoComplete={'off'} onSubmit={handleSubmit}>
             <div className={styles.formField}>
                 <p className={styles.label}>Login</p>
                 <input className={styles.textInput} type={'text'} name='userName' onChange={handleInput}/>
@@ -39,10 +38,10 @@ const LoginForm = (props) => {
                 <input className={styles.textInput} type={'password'} name='password' onChange={handleInput}/>
             </div>
             <div className={styles.formField}>
-                <p>Not a member? <button className={styles.registrationLink} href={'#'} onClick={(e) => handleOpenModal(e, <RegistrationForm/>)}>Create your account</button></p>
+                <p>Not a member? <button type={'button'} className={styles.registrationLink} onClick={() => handleOpenModal(<RegistrationForm/>)}>Create your account</button></p>
             </div>
             <div className={styles.submitWrapper}>
-                <button className={styles.submitBtn} onClick={handleSubmit}>Sign In</button>
+                <button type={'submit'} className={styles.submitBtn} onClick={handleSubmit}>Sign In</button>
             </div>
         </form>
     )

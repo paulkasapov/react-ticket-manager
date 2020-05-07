@@ -79,7 +79,6 @@ export const deleteTicket = (id) => {
         headers : {'auth-token': localStorage.authToken}
     } )
         .then(res => {
-            console.log(res);
             console.log(res.data);
         })
         .catch(error => console.log(error));
@@ -122,8 +121,9 @@ export const logIn = (userName, password) => {
     return (dispatch) => {
         axios.post(`${process.env.REACT_APP_SERVER_URL}/api/users/login`, { userName, password })
             .then(res => {
-                localStorage.setItem('authToken', res.data)
+                localStorage.setItem('authToken', res.data.token)
                 dispatch({
+                    userData: res.data.userData,
                     type: LOG_IN,
                 })
             })
@@ -139,16 +139,18 @@ export const logOut = () => {
 };
 
 export const tokenLogIn = () => {
+
     return (dispatch) => {
         axios.post(`${process.env.REACT_APP_SERVER_URL}/api/users/token_login`, {}, {
             headers : {'auth-token': localStorage.authToken}
         })
             .then(res => {
-                console.log(res)
+                console.log(res.data)
                 dispatch({
+                    userData: res.data,
                     type: LOG_IN,
                 })
             })
-            .catch(() => {});
+            .catch((error) => console.log(error.response));
     }
 };
