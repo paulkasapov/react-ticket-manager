@@ -1,9 +1,10 @@
 import React, {useState} from 'react'
-import styles from './RegistrationModal.module.css'
+import styles from './RegistrationForm.module.css'
 import {useDispatch} from "react-redux";
 import {addUser, closeModal} from "../../redux/actions";
+import {validateAddTicketForm, validateRegistrationForm} from '../../FormValidation'
 
-const RegistrationModal = () => {
+const RegistrationForm = () => {
 
     const [state, setState] = useState({
         form: {
@@ -14,14 +15,7 @@ const RegistrationModal = () => {
             lastName: '',
             specialities: []
         },
-        errors: {
-            login: '',
-            password: '',
-            confirmPassword: '',
-            firstName: '',
-            lastName: '',
-            specialities: ''
-        },
+        errors: {},
         currentUser: {
             userId: 4,
             firstName: 'Pavel',
@@ -48,22 +42,12 @@ const RegistrationModal = () => {
         setState((prevState) => ({...prevState, form: {...prevState.form, [name]: value}}));
     };
 
-    const validateForm = () => {
-        return (
-            validateTextField('login', state.form.login) ||
-            validateTextField('password', state.form.password) ||
-            validateTextField('firstName', state.form.firstName) ||
-            validateTextField('lastName', state.form.lastName) ||
-            validateConfirmPassword() ||
-            validateSpecialities()
-        )
-    };
-
     const handleSubmit = (e) => {
         e.preventDefault();
-        const hasError = validateForm();
-        console.log(hasError);
-        if (!hasError) {
+        const errors = validateRegistrationForm(state.form)
+        console.log(errors)
+        setState((prevState) => ({...prevState, errors: errors}))
+        if (Object.keys(errors).length === 0) {
             const user = {
                 userName: state.form.login,
                 password: state.form.password,
@@ -175,4 +159,4 @@ const RegistrationModal = () => {
     )
 };
 
-export default RegistrationModal
+export default RegistrationForm

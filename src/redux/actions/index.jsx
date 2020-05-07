@@ -149,11 +149,6 @@ export const tokenLogIn = () => {
                     type: LOG_IN,
                 })
             })
-            .catch(error => {
-                // console.log(error)
-                dispatch({
-                    type: "ERROR_HANDLE"
-                })
-            });
+            .catch(() => {});
     }
 };

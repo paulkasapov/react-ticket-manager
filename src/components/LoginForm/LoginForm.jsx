@@ -2,19 +2,14 @@ import React, {useState} from 'react'
 import styles from './LoginForm.module.css'
 import {useDispatch} from "react-redux";
 import {closeModal, logIn} from "../../redux/actions";
-import RegistrationModal from "../RegistrationModal/RegistrationModal";
+import RegistrationForm from "../RegistrationForm/RegistrationForm";
 
 const LoginForm = (props) => {
 
     const [state, setState] = useState({
-        userName: '',
-        password: '',
-        currentUser: {
-            userId: 4,
-            firstName: 'Pavel',
-            lastName: 'Kasapov',
-            avatar: '/default-avatar.png',
-            specialities: ['Programmer']
+        form: {
+            userName: '',
+            password: '',
         }
     });
 
@@ -24,12 +19,12 @@ const LoginForm = (props) => {
 
     const handleInput = (event) => {
         const {value, name} = event.currentTarget;
-        setState((prevState) => ({...prevState, [name]: value,}));
+        setState((prevState) => ({...prevState, form: {...prevState.form, [name]: value,}}));
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(logIn(state.userName, state.password));
+        dispatch(logIn(state.form.userName, state.form.password));
         dispatch(closeModal())
     };
 
@@ -44,7 +39,7 @@ const LoginForm = (props) => {
                 <input className={styles.textInput} type={'password'} name='password' onChange={handleInput}/>
             </div>
             <div className={styles.formField}>
-                <p>Not a member? <a className={styles.registrationLink} href={'#'} onClick={() => handleOpenModal(<RegistrationModal/>)}>Create your account</a></p>
+                <p>Not a member? <a className={styles.registrationLink} href={'#'} onClick={() => handleOpenModal(<RegistrationForm/>)}>Create your account</a></p>
             </div>
             <div className={styles.submitWrapper}>
                 <button className={styles.submitBtn} onClick={handleSubmit}>Sign In</button>

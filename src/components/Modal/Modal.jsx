@@ -8,14 +8,14 @@ const Modal = (props) => {
     const {children} = props;
     const dispatch = useDispatch();
 
-    const handlerClose = (e) => {
-        if (e.target.id === 'modal') {
-            dispatch(closeModal())
-        }
-    };
+    // const handlerClose = (e) => {
+    //     if (e.target.id === 'modal') {
+    //         dispatch(closeModal())
+    //     }
+    // };
 
     return (
-        <div id={'modal'} onClick={handlerClose} className={styles.modal}>
+        <div className={styles.modal}>
             <div className={styles.modalContent}>
                 {children}
             </div>

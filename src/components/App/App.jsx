@@ -3,7 +3,7 @@ import styles from './App.module.css';
 import Sidebar from '../../components/Sidebar/Sidebar'
 import Content from '../../components/Content/Content'
 import Modal from "../../components/Modal/Modal";
-import AddTicketModal from "../AddTicketModal/AddTicketModal";
+import AddTicketForm from "../AddTicketForm/AddTicketForm";
 import { BrowserRouter } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {logOut, openModal, ticketsFetchData, tokenLogIn} from "../../redux/actions";
@@ -64,7 +64,7 @@ const App = () => {
                     {isLoggedIn ? (
                         <>
                             <div className={styles.userName}>UserName <button className={styles.logOutBtn} onClick={handleLogOut}>x</button></div>
-                            <button onClick={() => handleOpenModal(<AddTicketModal/>)}
+                            <button onClick={() => handleOpenModal(<AddTicketForm/>)}
                                     className={styles.addBtn}>
                                 +
                             </button>

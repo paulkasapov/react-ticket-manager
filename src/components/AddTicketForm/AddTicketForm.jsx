@@ -1,17 +1,21 @@
 import React, {useState} from 'react'
-import styles from './AddTicketModal.module.css'
+import styles from './AddTicketForm.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {addTicket, changeSelectedTicketId, closeModal} from "../../redux/actions";
+import {validateAddTicketForm} from '../../FormValidation'
 
-const AddTicketModal = () => {
+const AddTicketForm = () => {
 
     const [state, setState] = useState({
-        name: '',
-        description: '',
-        status: 'unassigned',
-        geoCode: '',
-        kmFrom: '',
-        kmTo: '',
+        form: {
+            name: '',
+            description: '',
+            status: 'unassigned',
+            geoCode: '',
+            kmFrom: '',
+            kmTo: '',
+        },
+        errors: {},
         currentUser: {
             userId: 4,
             firstName: 'Pavel',
@@ -33,26 +37,31 @@ const AddTicketModal = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const now = JSON.parse(JSON.stringify({now: new Date()})).now;
-        const ticket = {
-            ticketId: lastTicketId + 1,
-            number: `PU-OV-${lastTicketId + 1}`,
-            lastUpdatedTime: now,
-            owner: state.currentUser,
-            reportedTime: now,
-            status: state.status,
-            description: state.description,
-            asset: {
-                assetId: lastTicketId + 1,
-                name: state.name,
-                geoCode: state.geoCode,
-                kmFrom: +state.kmFrom,
-                kmTo: +state.kmTo,
-            }
-        };
-        dispatch(addTicket(ticket));
-        dispatch(changeSelectedTicketId(lastTicketId + 1));
-        dispatch(closeModal())
+        const errors = validateAddTicketForm(state.form)
+        console.log(errors)
+        setState((prevState) => ({...prevState, errors: errors}))
+        if (Object.keys(errors).length === 0) {
+            const now = JSON.parse(JSON.stringify({now: new Date()})).now;
+            const ticket = {
+                ticketId: lastTicketId + 1,
+                number: `PU-OV-${lastTicketId + 1}`,
+                lastUpdatedTime: now,
+                owner: state.currentUser,
+                reportedTime: now,
+                status: state.form.status,
+                description: state.form.description,
+                asset: {
+                    assetId: lastTicketId + 1,
+                    name: state.form.name,
+                    geoCode: state.form.geoCode,
+                    kmFrom: +state.form.kmFrom,
+                    kmTo: +state.form.kmTo,
+                }
+            };
+            dispatch(addTicket(ticket));
+            dispatch(changeSelectedTicketId(lastTicketId + 1));
+            dispatch(closeModal())
+        }
     };
 
     return (
@@ -87,6 +96,11 @@ const AddTicketModal = () => {
                 <input className={styles.smallInput} type={'text'} placeholder={'To'} name='kmTo'
                        onChange={handleInput}/>
             </div>
+            <div className={styles.errorWrapper}><p className={styles.errorMessage}>{state.errors.name}</p></div>
+            <div className={styles.errorWrapper}><p className={styles.errorMessage}>{state.errors.description}</p></div>
+            <div className={styles.errorWrapper}><p className={styles.errorMessage}>{state.errors.geoCode}</p></div>
+            <div className={styles.errorWrapper}><p className={styles.errorMessage}>{state.errors.kmFrom}</p></div>
+            <div className={styles.errorWrapper}><p className={styles.errorMessage}>{state.errors.kmTo}</p></div>
             <div className={styles.submitWrapper}>
                 <button className={styles.submitBtn} onClick={handleSubmit}>Submit</button>
             </div>
@@ -94,4 +108,4 @@ const AddTicketModal = () => {
     )
 };
 
-export default AddTicketModal
+export default AddTicketForm
