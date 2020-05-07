@@ -8,7 +8,6 @@ export const DELETE_TICKET = 'DELETE_TICKET';
 export const ADD_TICKET = 'ADD_TICKET';
 export const LOG_IN = 'LOG_IN';
 export const LOG_OUT = 'LOG_OUT';
-export const ADD_USER = 'ADD_USER';
 export const ERROR_LOGIN_EXISTS = 'ERROR_LOGIN_EXISTS';
 export const ERROR_INVALID_SIGN_IN = 'ERROR_INVALID_SIGN_IN';
 export const LOGIN_IS_UNIQUE = 'LOGIN_UNIQUE';

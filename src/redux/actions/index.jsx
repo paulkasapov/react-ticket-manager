@@ -10,7 +10,6 @@ import {
     ADD_TICKET,
     LOG_IN,
     LOG_OUT,
-    ADD_USER,
     LOGIN_IS_UNIQUE,
     ERROR_LOGIN_EXISTS,
     ERROR_INVALID_SIGN_IN
@@ -103,12 +102,20 @@ export const addTicket = (newTicket) => {
 };
 
 export const addUser = (newUser) => {
-    axios.post(`${process.env.REACT_APP_SERVER_URL}/api/users/register`, { ...newUser })
-        .catch(error => console.log(error.response));
-    return{
-        type: ADD_USER,
-        newUser
+    return (dispatch) => {
+        axios.post(`${process.env.REACT_APP_SERVER_URL}/api/users/register`, { ...newUser })
+
+            .then(res => {
+                console.log(res.data.savedUser)
+                localStorage.setItem('authToken', res.data.token)
+                dispatch({
+                    userData: res.data.savedUser,
+                    type: LOG_IN,
+                })
+            })
+            .catch(error => console.log(error));
     }
+
 };
 
 export const logIn = (userName, password) => {
@@ -148,7 +155,7 @@ export const tokenLogIn = () => {
                     userData: res.data
                 })
             })
-            .catch((error) => console.log(error));
+            .catch((error) => console.log(error.response));
     }
 };
 
