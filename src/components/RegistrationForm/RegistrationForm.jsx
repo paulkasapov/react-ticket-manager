@@ -57,7 +57,7 @@ const RegistrationForm = () => {
     return (
         <form className={styles.wrapper} autoComplete={'off'} noValidate>
             <div className={styles.closeBtnWrapper}>
-                <button onClick={() => dispatch(closeModal())} className={styles.closeBtn}>x</button>
+                <button type={'button'} onClick={() => dispatch(closeModal())} className={styles.closeBtn}>x</button>
             </div>
             <div className={styles.formField}>
                 <div className={styles.labelWrapper}>

@@ -80,9 +80,6 @@ export const deleteTicket = (id) => {
     axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/tickets/delete/${id}`,  {
         headers : {'auth-token': localStorage.authToken}
     } )
-        .then(res => {
-            console.log(res.data);
-        })
         .catch(error => console.log(error.response));
     return{
         type: DELETE_TICKET,
@@ -104,12 +101,10 @@ export const addTicket = (newTicket) => {
 export const addUser = (newUser) => {
     return (dispatch) => {
         axios.post(`${process.env.REACT_APP_SERVER_URL}/api/users/register`, { ...newUser })
-
             .then(res => {
-                console.log(res.data.savedUser)
                 localStorage.setItem('authToken', res.data.token)
                 dispatch({
-                    userData: res.data.savedUser,
+                    userData: res.data.userData,
                     type: LOG_IN,
                 })
             })
@@ -128,7 +123,8 @@ export const logIn = (userName, password) => {
                     type: LOG_IN,
                 })
             })
-            .catch(() => {
+            .catch((error) => {
+                console.log(error.response.data)
                 dispatch({
                     type: ERROR_INVALID_SIGN_IN,
                 })
@@ -144,7 +140,6 @@ export const logOut = () => {
 };
 
 export const tokenLogIn = () => {
-
     return (dispatch) => {
         axios.post(`${process.env.REACT_APP_SERVER_URL}/api/users/token_login`, {}, {
             headers : {'auth-token': localStorage.authToken}
@@ -155,7 +150,7 @@ export const tokenLogIn = () => {
                     userData: res.data
                 })
             })
-            .catch((error) => console.log(error.response));
+            .catch((error) => console.log(error.response.data));
     }
 };
 
@@ -168,7 +163,8 @@ export const checkUniqueLogin = (userName) => {
                     type: LOGIN_IS_UNIQUE,
                 })
             })
-            .catch(() => {
+            .catch((error) => {
+                console.log(error.response.data)
                 dispatch({
                     type: ERROR_LOGIN_EXISTS,
                 })

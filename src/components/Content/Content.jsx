@@ -18,7 +18,7 @@ const ShowDescription = (props) => {
 
     useEffect(() => {
         dispatch(changeSelectedTicketId(+params.id))
-    }, [dispatch, params.id])
+    })
 
     return (
         <>
