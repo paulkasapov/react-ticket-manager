@@ -5,8 +5,8 @@ export const validateRegistrationForm = (form) => {
     if ((form.login.length < 3) || (form.login.length > 20)) {
         errors.login = 'Length should be 3-20 letters'
     }
-    if ((form.password.length < 3) || (form.password.length > 20)) {
-        errors.password = 'Length should be 6-20 letters'
+    if ((form.password.length < 5) || (form.password.length > 20)) {
+        errors.password = 'Length should be 5-20 letters'
     }
     if (form.password !== form.confirmPassword) {
         errors.confirmPassword = 'Passwords should match'
